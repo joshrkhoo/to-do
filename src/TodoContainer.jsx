@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import ViewTodos from './ViewTodos'
+import TodoForm from './Todoform'
 
 
 const TodoContainer = () =>{
@@ -29,7 +30,7 @@ const TodoContainer = () =>{
 
     return(
         <div>
-            <h2>To do List</h2>
+            <h2 className="title">To do List</h2>
             {
                 todos?.length > 0
                     ?(
