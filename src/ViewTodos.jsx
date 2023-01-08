@@ -8,7 +8,7 @@ const ViewTodos = ({ tab }) => {
         <div className="tabs">
             <h3>{tab.title}</h3>
             <p>{date}</p>
-            <div>{tab.description}</div>
+            <p className="postDescription">{tab.description}</p>
         </div>
     )
 }
