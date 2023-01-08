@@ -16,7 +16,6 @@ const TodoForm = () => {
         })
             .then(res => {
                 console.log(res.data)
-                
             })
     }
 
@@ -44,7 +43,6 @@ const TodoForm = () => {
                         />
                     </div>
                 </div>
-
 
                 <div>
                     <div>

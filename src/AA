@@ -7,7 +7,6 @@
 
 
 posting the form 
-
 1. button to send
 2. outputs new todo
 3. new todo gets saved to api
