@@ -1,26 +1,21 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import TodoForm from './TodoForm'
-
+import deletePost from './ViewTodos'
 
 const ViewTodos = ({ tab }) => {
-    const url = 'https://todoapi.khoo.one'
+    const client = axios.create({ baseURL: 'https://todoapi.khoo.one', });
+    const [posts, setPosts] = useState([])
 
-    const {deleting, setDeleting} = useState([])
 
-    const deletePost= async () =>{
-        delete(url)
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data)
-            setDeleting(data)
-        }) 
+    const deletePost = async (id) => {
+        try {
+            await client.delete('${id}');
+        }
+        catch (error) {
+            console.log(error);
+        }
     }
-
-    useEffect(()=>{
-        deletePost()
-    }, [])
-
+    console.log(deletePost())
     const date = new Date(tab.createdDate).toLocaleDateString()
     return (
         <div className="tabs">
@@ -29,14 +24,16 @@ const ViewTodos = ({ tab }) => {
             <p className="postDescription">{tab.description}</p>
 
 
-            <button 
+            <button
                 type="Delete"
-                onDelete = {(e) => deletePost(e)}
+                onClick={() => deletePost(tab.id)}
             >
                 Delete
             </button>
-        </div>
+            
+        </div>     
     )
+
 }
 
 export default ViewTodos;

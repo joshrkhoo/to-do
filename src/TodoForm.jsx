@@ -7,7 +7,7 @@ const TodoForm = () => {
 
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
-
+  
 
     function submit(e) {
         window.location.reload(false)
@@ -15,7 +15,7 @@ const TodoForm = () => {
             title: title,
             description: description
         })
-            .then(res => {
+            .then(response => {
                 setTitle("")
                 setDescription("")
             })
