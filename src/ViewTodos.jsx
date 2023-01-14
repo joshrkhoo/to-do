@@ -6,34 +6,34 @@ import TodoForm from './TodoForm'
 const ViewTodos = ({ tab }) => {
     const url = 'https://todoapi.khoo.one'
 
+    const {deleting, setDeleting} = useState([])
 
-
-
-    const [deleting, setDeleting] = useState(false)
-    
-    function deletePost(){
-        fetch(url, {method:'DELETE'})
-        .then(()=>this.setDeleting({status: "Delete Successful"}))
-    }
-    useEffect(() =>{
-        deletePost();
+    const deletePost= async () =>{
+        delete(url)
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data)
+            setDeleting(data)
+        }) 
     }
 
-    )
+    useEffect(()=>{
+        deletePost()
+    }, [])
 
     const date = new Date(tab.createdDate).toLocaleDateString()
     return (
         <div className="tabs">
             <h3>{tab.title}</h3>
-            <p>{date}</p>
+            <p>Date: {date}</p>
             <p className="postDescription">{tab.description}</p>
 
-            <button
-                type="button"
-                className="deleteButton"
-                onClick={() => deletePost()}
+
+            <button 
+                type="Delete"
+                onDelete = {(e) => deletePost(e)}
             >
-                delete
+                Delete
             </button>
         </div>
     )

@@ -7,7 +7,6 @@ import axios from "axios";
 const TodoContainer = () => {
     const url = 'https://todoapi.khoo.one'
     const [todos, setTodos] = useState([])
-    //const { deleting, setDeleting }
 
     //The word “async” before a function means one simple thing: a function always returns a promise.
     //await makes js wait until that promise settles, then returns its result
@@ -20,20 +19,6 @@ const TodoContainer = () => {
             });
 
     }
-
-   /* async function deletePost{
-        fetch(url, { method: 'DELETE' })
-            .then(async response => {
-                const data = await response.json();
-                if (!response.ok){
-                    const error = (data && data.message) || response.status;
-                    return Promise.reject(error)
-                }
-                setDeleting()
-            })
-
-    }*/
-
 
     //The default behaviour of an effect is to fire the effect after every completed render. From this an effect is always recreated if one of its dependencies change. 
     //This may be overkill if we dont want a new effect every update.
@@ -65,6 +50,7 @@ const TodoContainer = () => {
                     )
             }
         </div>
+        
     )
 }
 

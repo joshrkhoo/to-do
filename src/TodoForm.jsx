@@ -1,31 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import ViewTodos from "./ViewTodos";
 
 const TodoForm = () => {
     const url = "https://todoapi.khoo.one"
-    const [data, setData] = useState({
-        title: "",
-        description: ""
-    })
+
+    const [title, setTitle] = useState("")
+    const [description, setDescription] = useState("")
 
 
     function submit(e) {
+        window.location.reload(false)
         axios.post(url, {
-            title: data.title,
-            description: data.description
+            title: title,
+            description: description
         })
             .then(res => {
-                console.log(res.data)
+                setTitle("")
+                setDescription("")
+            })
+            .catch(err =>{
+                console.log(err.response.status)
             })
     }
 
-
-    function handle(e) {
-        const newData = { ...data }
-        newData[e.target.id] = e.target.value
-        setData(newData)
-        console.log(newData)
-    }
 
     return (
         <div>
@@ -36,9 +34,9 @@ const TodoForm = () => {
                             type="text"
                             name="title"
                             id="title"
-                            value={data.title}
+                            value={title}
                             placeholder="Title"
-                            onChange={(e) => handle(e)}
+                            onChange={(e) => setTitle(e.target.value)}
                             className="formTitle"
                         />
                     </div>
@@ -50,9 +48,9 @@ const TodoForm = () => {
                             type="text"
                             name="description"
                             id="description"
-                            value={data.description}
+                            value={description}
                             placeholder="What to do?"
-                            onChange={(e) => handle(e)}
+                            onChange={(e) => setDescription(e.target.value)}
                             className="formDescription"
                         // 'e' is a synthetic event specific for the handler 'onChange'
                         />
