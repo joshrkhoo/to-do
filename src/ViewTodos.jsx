@@ -12,8 +12,11 @@ where am i making the send
 what is coming back
 */
 
+    // What does this do
+    // What am I using id for
     const deletePost = async (id) => {
         try {
+            // What is: '${id}'
             console.log(await client.delete('${id}'));
             
         }
@@ -21,8 +24,11 @@ what is coming back
             console.log(error);
         }
     }
+
+    // What does this do? Does the delete post execute?
     console.log(deletePost())
 
+    // What is this date for?
     const date = new Date(tab.createdDate).toLocaleDateString()
     return (
         <div className="tabs">
@@ -33,6 +39,7 @@ what is coming back
 
             <button
                 type="Delete"
+                // What is this id?
                 onClick={() => deletePost(tab.id)}
             >
                 Delete
