@@ -36,7 +36,7 @@ const TodoForm = () => {
                             id="title"
                             value={title}
                             placeholder="Title"
-                            onChange={(e) => setTitle(e.target.value)}
+                            onChange={(e) => setTitle(e.target.value)} 
                             className="formTitle"
                         />
                     </div>

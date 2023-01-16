@@ -10,3 +10,9 @@ posting the form
 1. button to send
 2. outputs new todo
 3. new todo gets saved to api
+
+
+error response when no text in form
+1. user clicks on submit
+2. alert user ('please enter todos')
+3. dont submit to api (otherwise blank submission)

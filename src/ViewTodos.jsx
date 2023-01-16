@@ -6,16 +6,23 @@ const ViewTodos = ({ tab }) => {
     const client = axios.create({ baseURL: 'https://todoapi.khoo.one', });
     const [posts, setPosts] = useState([])
 
+/*
+What is being sent
+where am i making the send
+what is coming back
+*/
 
     const deletePost = async (id) => {
         try {
-            await client.delete('${id}');
+            console.log(await client.delete('${id}'));
+            
         }
         catch (error) {
             console.log(error);
         }
     }
     console.log(deletePost())
+
     const date = new Date(tab.createdDate).toLocaleDateString()
     return (
         <div className="tabs">
