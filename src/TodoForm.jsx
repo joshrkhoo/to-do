@@ -3,14 +3,51 @@ import axios from "axios";
 import ViewTodos from "./ViewTodos";
 
 const TodoForm = () => {
-    // What kind of API is this?
-    // What happens if I go to the link?
+    
+    /*
+    What kind of API is this?
+    This is a Rest API (Representational state transfer)
+     - communciation 
+     - restful 
+     Benefits: 
+     - simple/standardised 
+     - scalable/stateless
+     - high performances/cache
+
+     Requests
+     (operators, endpoints, parameters/body, headers)
+     - create: post
+     - read: get
+     - update: put
+     - delete: delete
+
+     Response
+     - array 
+     - id 
+    */
+    
+    /*
+    What happens if I go to the link?
+    - ids of each todo
+    - created dates
+    - descriptions of the todo 
+    */
+
+
+
     const url = "https://todoapi.khoo.one"
 
     // What is useState? What is this form of variable assignment called? [title, setState]
-    const [title, setTitle] = useState("") // What am I storing in here?
-    const [description, setDescription] = useState("") // What am I storing in here?
-  
+    
+    const [title, setTitle] = useState("") 
+    const [description, setDescription] = useState("")
+
+    /* What am I storing in here? 
+    -'title' is the initial value being stored 
+    -'setTitle' is a function used to change the initial value
+        - line 68
+    - The quotations indicate the inital value of the object, in this case being an empty string
+    */
 
     // What is the purpose of this function?
     function submit(e) {
@@ -50,7 +87,7 @@ const TodoForm = () => {
                             id="title"
                             value={title}
                             placeholder="Title"
-                            {/* What does onChange do? What is e? */}
+                            /* What does onChange do? What is e? */
                             onChange={(e) => setTitle(e.target.value)} 
                             className="formTitle"
                         />
@@ -65,7 +102,7 @@ const TodoForm = () => {
                             id="description"
                             value={description}
                             placeholder="What to do?"
-                            {/* What does onChange do? What is e? */}
+                            /* What does onChange do? What is e? */
                             onChange={(e) => setDescription(e.target.value)}
                             className="formDescription"
                         // 'e' is a synthetic event specific for the handler 'onChange'

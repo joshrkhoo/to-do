@@ -12,21 +12,54 @@ where am i making the send
 what is coming back
 */
 
-    // What does this do
+    /* 
+    What does this do?
+    - It is a try...catch...finally statement
+    - compromises of a try block and either a catch block, a finally block, or both.
+    - code in 'try' block is executed first
+
+        try
+        - tests a block of code for errors
+        catch 
+        - handles the errors
+        throw
+        - lets us create custom errors
+        finally
+        - lets us execute code after trying catch regardless of the result
+    */
+
+    const deletePost = (todoid) =>{
+        fetch('https://todoapi.khoo.one/' + todoid,{
+            method: 'DELETE'
+        }).then((result)=>{
+            result.json().then((resp)=>{
+                console.warn(resp)
+            })
+        })
+        window.location.reload()
+    }
+
     // What am I using id for
-    const deletePost = async (id) => {
+    /* 
+        const deletePost = async (todoid) => {
         try {
-            // What is: '${id}'
-            console.log(await client.delete('${id}'));
-            
+            alert(todoid)
+            console.log(await client.delete('${todoid}'));
+
+             /*What is: '${id}?
+                - '$' is a javascript identifier, simply meaning that it identifies an object the same way that a name or variable  does
+                - in this case the dollar sign is used to identify the id of the todo being deleted
+
         }
         catch (error) {
             console.log(error);
         }
-    }
+        finally{
 
+        }
+      */  
     // What does this do? Does the delete post execute?
-    console.log(deletePost())
+   
 
     // What is this date for?
     const date = new Date(tab.createdDate).toLocaleDateString()
@@ -40,7 +73,7 @@ what is coming back
             <button
                 type="Delete"
                 // What is this id?
-                onClick={() => deletePost(tab.id)}
+                onClick={() => deletePost(tab.todoid)}
             >
                 Delete
             </button>
