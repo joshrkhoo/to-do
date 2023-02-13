@@ -41,7 +41,7 @@ const TodoContainer = (props) => {
                     ? (
                         <div>
                             {todos.map((todo, i) => (
-                                <ViewTodos key={i} tab={todo} />
+                                <ViewTodos key={i} tab={todo} fetchData={fetchData}  />
                             ))}
                         </div>
                     ) :

@@ -3,8 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import deletePost from './ViewTodos'
 
-const ViewTodos = ({ props, tab }) => {
-
+const ViewTodos = ({tab, fetchData}) => {
 /*
 What is being sent
 where am i making the send
@@ -13,13 +12,17 @@ what is coming back
 
  
 
-    const deletePost = (todoid) =>{
+    const deletePost = (e, todoid) =>{
+        e.preventDefault()
         fetch('https://todoapi.khoo.one/' + todoid,{
             method: 'DELETE'
-        }).then((result)=>{
-            result.json().then((resp)=>{
-                console.warn(resp)
-            })
+        }) 
+        .then((resp)=>{
+                console.log(resp)
+                fetchData()
+         })
+        .catch(err =>{
+            console.log(err.resp.status)
         })
     }
 
@@ -73,7 +76,7 @@ what is coming back
             <button
                 type="Delete"
                 // What is this id?
-                onClick={() => deletePost(tab.todoid)}
+                onClick={(e) => deletePost(e, tab.todoid)}
             >
                 Delete
             </button>
