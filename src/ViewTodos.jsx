@@ -1,3 +1,4 @@
+import { eventWrapper } from "@testing-library/user-event/dist/utils";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import deletePost from './ViewTodos'
@@ -36,7 +37,7 @@ what is coming back
                 console.warn(resp)
             })
         })
-        window.location.reload()
+        Event.preventDefault()
     }
 
     // What am I using id for
