@@ -4,7 +4,7 @@ import ViewTodos from './ViewTodos'
 import TodoForm from './TodoForm'
 import axios from "axios";
 
-const TodoContainer = () => {
+const TodoContainer = (props) => {
     const url = 'https://todoapi.khoo.one'
     const [todos, setTodos] = useState([])
 
@@ -26,14 +26,14 @@ const TodoContainer = () => {
 
     useEffect(() => {
         fetchData() //callback function
-    }, []) // an empty array '[]' ensures the component runs only when the component is registered
+    },[]) // an empty array '[]' ensures the component runs only when the component is registered
 
     return (
         <div>
             <h2 className="title">To do List</h2>
 
             <div className="form">
-                <TodoForm></TodoForm>
+                <TodoForm fetchData={fetchData} />
             </div>
 
             {
@@ -45,9 +45,9 @@ const TodoContainer = () => {
                             ))}
                         </div>
                     ) :
-                    (
-                        alert("where my todos?")
-                    )
+                    <div>
+                        Loading
+                    </div>
             }
         </div>
         

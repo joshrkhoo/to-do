@@ -3,9 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import deletePost from './ViewTodos'
 
-const ViewTodos = ({ tab }) => {
-    const client = axios.create({ baseURL: 'https://todoapi.khoo.one', });
-    const [posts, setPosts] = useState([])
+const ViewTodos = ({ props, tab }) => {
 
 /*
 What is being sent
@@ -13,21 +11,7 @@ where am i making the send
 what is coming back
 */
 
-    /* 
-    What does this do?
-    - It is a try...catch...finally statement
-    - compromises of a try block and either a catch block, a finally block, or both.
-    - code in 'try' block is executed first
-
-        try
-        - tests a block of code for errors
-        catch 
-        - handles the errors
-        throw
-        - lets us create custom errors
-        finally
-        - lets us execute code after trying catch regardless of the result
-    */
+ 
 
     const deletePost = (todoid) =>{
         fetch('https://todoapi.khoo.one/' + todoid,{
@@ -37,8 +21,9 @@ what is coming back
                 console.warn(resp)
             })
         })
-        Event.preventDefault()
     }
+
+
 
     // What am I using id for
     /* 
@@ -59,7 +44,21 @@ what is coming back
 
         }
       */  
-    // What does this do? Does the delete post execute?
+      /* 
+    What does this do?
+    - It is a try...catch...finally statement
+    - compromises of a try block and either a catch block, a finally block, or both.
+    - code in 'try' block is executed first
+
+        try
+        - tests a block of code for errors
+        catch 
+        - handles the errors
+        throw
+        - lets us create custom errors
+        finally
+        - lets us execute code after trying catch regardless of the result
+    */
    
 
     // What is this date for?

@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
 import axios from "axios";
-import ViewTodos from "./ViewTodos";
+import React, { useState } from "react";
 import TodoContainer from "./TodoContainer";
 
-const TodoForm = () => {
-    
+const TodoForm = (props) => {
     /*
     What kind of API is this?
     This is a Rest API (Representational state transfer)
@@ -25,6 +23,8 @@ const TodoForm = () => {
      Response
      - array 
      - id 
+
+     What is difference between props and { fetchData }
     */
     
     /*
@@ -33,7 +33,6 @@ const TodoForm = () => {
     - created dates
     - descriptions of the todo 
     */
-
 
     const url = "https://todoapi.khoo.one"
 
@@ -54,10 +53,14 @@ const TodoForm = () => {
         // What does this do? Do we need it? Can we try to do this without refreshing?
         // Is there another way to make it not reload using the e?
         e.preventDefault()
-        // What is this method? What is axios?
-        // What are the parameters here? What else can we put in there
-        // What does this method return?
-        axios.post(url, {
+        /*/ 
+         What is this method? What is axios?
+            - axios is a promise-based HTTP library that lets us make requests to either our own or a third pary server to fetch data.
+            - We are using the post method
+         What are the parameters here? What else can we put in there
+         What does this method return?
+        */
+         axios.post(url, {
             title: title,
             description: description
         })
@@ -66,11 +69,16 @@ const TodoForm = () => {
             .then(response => {
                 setTitle("")
                 setDescription("")
+                console.log(response)
+                
+                props.fetchData()
+    
             })
-            .then(TodoContainer =>{
-                TodoContainer()
-            })
-            // What is catch? When does this occur
+            
+            /*
+            What is catch? When does this occur
+                - catches misbehaving code to ensure our app doesnt blow up into smithereens
+            */
             .catch(err =>{
                 console.log(err.response.status)
             })
@@ -94,6 +102,7 @@ const TodoForm = () => {
                             /* What does onChange do? What is e? */
                             onChange={(e) => setTitle(e.target.value)} 
                             className="formTitle"
+                            required
                         />
                     </div>
                 </div>
@@ -106,10 +115,15 @@ const TodoForm = () => {
                             id="description"
                             value={description}
                             placeholder="What to do?"
-                            /* What does onChange do? What is e? */
+                            required
+                            /* 
+                            What does onChange do? What is e?
+                                - Onchange is an event handler which returns a synthetic event object containing useful meta data
+                                    - meta data: input's id, name, current value
+                                    - we can acces the target input's value inside of the handleChange by accessing e.target
+                            */
                             onChange={(e) => setDescription(e.target.value)}
                             className="formDescription"
-                        // 'e' is a synthetic event specific for the handler 'onChange'
                         />
                     </div>
                 </div>
