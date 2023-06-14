@@ -1,42 +1,33 @@
+import { eventWrapper } from "@testing-library/user-event/dist/utils";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import deletePost from './ViewTodos'
 
-const ViewTodos = ({ tab }) => {
-    const client = axios.create({ baseURL: 'https://todoapi.khoo.one', });
-    const [posts, setPosts] = useState([])
+const ViewTodos = ({tab, fetchData}) => {
 /*
 What is being sent
 where am i making the send
 what is coming back
 */
 
-    /* 
-    What does this do?
-    - It is a try...catch...finally statement
-    - compromises of a try block and either a catch block, a finally block, or both.
-    - code in 'try' block is executed first
+ 
 
-        try
-        - tests a block of code for errors
-        catch 
-        - handles the errors
-        throw
-        - lets us create custom errors
-        finally
-        - lets us execute code after trying catch regardless of the result
-    */
-
-    const deletePost = (todoid) =>{
-        fetch('http://127.0.0.1:5000/todos' + todoid,{
+    const deletePost = (e, todoid) =>{
+        e.preventDefault()
+        fetch('https://todoapi.khoo.one/' + todoid,{
             method: 'DELETE'
-        }).then((result)=>{
-            result.json().then((resp)=>{
-                console.warn(resp)
-            })
+        }) 
+        .then((resp)=>{
+                console.log(resp)
+                fetchData()
+         })
+        .catch(err =>{
+            console.log(err.resp.status)
         })
         // window.location.reload()
     }
+
+
 
     // What am I using id for
     /* 
@@ -57,7 +48,21 @@ what is coming back
 
         }
       */  
-    // What does this do? Does the delete post execute?
+      /* 
+    What does this do?
+    - It is a try...catch...finally statement
+    - compromises of a try block and either a catch block, a finally block, or both.
+    - code in 'try' block is executed first
+
+        try
+        - tests a block of code for errors
+        catch 
+        - handles the errors
+        throw
+        - lets us create custom errors
+        finally
+        - lets us execute code after trying catch regardless of the result
+    */
    
 
     // What is this date for?
@@ -73,7 +78,7 @@ what is coming back
             <button
                 type="Delete"
                 // What is this id?
-                onClick={() => deletePost(tab.todoid)}
+                onClick={(e) => deletePost(e, tab.todoid)}
             >
                 Delete
             </button>

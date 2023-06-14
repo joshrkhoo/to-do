@@ -28,7 +28,7 @@ const TodoContainer = () => {
 
     useEffect(() => {
         fetchData() //callback function
-    }, []) // an empty array '[]' ensures the component runs only when the component is registered
+    },[]) // an empty array '[]' ensures the component runs only when the component is registered
 
     return (
         <div>
@@ -37,7 +37,7 @@ const TodoContainer = () => {
             <h2 className="title">To do List</h2>
 
             <div className="form">
-                <TodoForm fetchData={fetchData}></TodoForm>
+                <TodoForm fetchData={fetchData} />
             </div>
 
             {
@@ -45,13 +45,13 @@ const TodoContainer = () => {
                     ? (
                         <div>
                             {todos.map((todo, i) => (
-                                <ViewTodos key={i} tab={todo} />
+                                <ViewTodos key={i} tab={todo} fetchData={fetchData}  />
                             ))}
                         </div>
                     ) :
-                    (
-                        ""
-                    )
+                    <div>
+                        Loading
+                    </div>
             }
 
         </div>
