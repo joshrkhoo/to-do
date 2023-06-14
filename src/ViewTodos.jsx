@@ -3,28 +3,28 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import deletePost from './ViewTodos'
 
-const ViewTodos = ({tab, fetchData}) => {
-/*
-What is being sent
-where am i making the send
-what is coming back
-*/
+const ViewTodos = ({ tab, fetchData }) => {
+    /*
+    What is being sent
+    where am i making the send
+    what is coming back
+    */
 
- 
 
-    const deletePost = (e, todoid) =>{
+
+    const deletePost = (e, todoid) => {
         e.preventDefault()
         console.log(todoid)
-        fetch('http://127.0.0.1:5000/todos/' + todoid,{
+        fetch('http://127.0.0.1:5000/todos/' + todoid, {
             method: 'DELETE'
-        }) 
-        .then((resp)=>{
+        })
+            .then((resp) => {
                 console.log(resp)
                 fetchData()
-         })
-        .catch(err =>{
-            console.log(err.resp?.status)
-        })
+            })
+            .catch(err => {
+                console.log(err.resp?.status)
+            })
         // window.location.reload()
     }
 
@@ -48,31 +48,34 @@ what is coming back
         finally{
 
         }
-      */  
-      /* 
-    What does this do?
-    - It is a try...catch...finally statement
-    - compromises of a try block and either a catch block, a finally block, or both.
-    - code in 'try' block is executed first
+      */
+    /* 
+  What does this do?
+  - It is a try...catch...finally statement
+  - compromises of a try block and either a catch block, a finally block, or both.
+  - code in 'try' block is executed first
 
-        try
-        - tests a block of code for errors
-        catch 
-        - handles the errors
-        throw
-        - lets us create custom errors
-        finally
-        - lets us execute code after trying catch regardless of the result
-    */
-   
+      try
+      - tests a block of code for errors
+      catch 
+      - handles the errors
+      throw
+      - lets us create custom errors
+      finally
+      - lets us execute code after trying catch regardless of the result
+  */
+
 
     // What is this date for?
-    const date = new Date(tab.datetime_created).toLocaleDateString('en-AU');
-    const time = new Date(tab.datetime_created).toLocaleTimeString('en-AU', { hour: 'numeric', minute: 'numeric', hour12: true});
+    // const date = new Date(tab.datetime_created).toLocaleDateString('en-AU');
+    // const time = new Date(tab.datetime_created).toLocaleTimeString('en-AU', { hour: 'numeric', minute: 'numeric', hour12: true });
+    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric'};
+    var date = new Date(tab.datetime_created)
+    date = date.toLocaleDateString('en-AU', options)
     return (
         <div className="tabs">
             <h3>{tab.title}</h3>
-            {tab.datetime_created && <p>{date}{time}</p>}
+            {tab.datetime_created && <p>{date}</p>}
             <p className="postDescription">{tab.description}</p>
 
 
@@ -83,8 +86,8 @@ what is coming back
             >
                 Delete
             </button>
-            
-        </div>     
+
+        </div>
     )
 
 }
