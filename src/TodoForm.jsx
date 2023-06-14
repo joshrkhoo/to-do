@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ViewTodos from "./ViewTodos";
 
-const TodoForm = () => {
+const TodoForm = ({fetchData}) => {
     
     /*
     What kind of API is this?
@@ -35,7 +35,7 @@ const TodoForm = () => {
 
 
 
-    const url = "https://todoapi.khoo.one"
+    const url = 'http://127.0.0.1:5000/todos'
 
     // What is useState? What is this form of variable assignment called? [title, setState]
     
@@ -53,7 +53,11 @@ const TodoForm = () => {
     function submit(e) {
         // What does this do? Do we need it? Can we try to do this without refreshing?
         // Is there another way to make it not reload using the e?
-        window.location.reload(false)
+
+
+        // window.location.reload(false)
+
+        e.preventDefault()
 
         // What is this method? What is axios?
         // What are the parameters here? What else can we put in there
@@ -67,11 +71,17 @@ const TodoForm = () => {
             .then(response => {
                 setTitle("")
                 setDescription("")
+                fetchData()
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             })
             // What is catch? When does this occur
             .catch(err =>{
                 console.log(err.response.status)
             })
+
     }
 
 
@@ -122,5 +132,6 @@ const TodoForm = () => {
     )
 
 }
+
 
 export default TodoForm;

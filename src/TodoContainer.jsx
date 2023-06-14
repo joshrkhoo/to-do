@@ -4,9 +4,11 @@ import ViewTodos from './ViewTodos'
 import TodoForm from './TodoForm'
 import axios from "axios";
 
+
 const TodoContainer = () => {
-    const url = 'https://todoapi.khoo.one'
+    const url = 'http://127.0.0.1:5000/todos'
     const [todos, setTodos] = useState([])
+
 
     //The word “async” before a function means one simple thing: a function always returns a promise.
     //await makes js wait until that promise settles, then returns its result
@@ -30,10 +32,12 @@ const TodoContainer = () => {
 
     return (
         <div>
+
+
             <h2 className="title">To do List</h2>
 
             <div className="form">
-                <TodoForm></TodoForm>
+                <TodoForm fetchData={fetchData}></TodoForm>
             </div>
 
             {
@@ -46,9 +50,10 @@ const TodoContainer = () => {
                         </div>
                     ) :
                     (
-                        alert("where my todos?")
+                        ""
                     )
             }
+
         </div>
         
     )

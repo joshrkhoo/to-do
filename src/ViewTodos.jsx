@@ -5,7 +5,6 @@ import deletePost from './ViewTodos'
 const ViewTodos = ({ tab }) => {
     const client = axios.create({ baseURL: 'https://todoapi.khoo.one', });
     const [posts, setPosts] = useState([])
-
 /*
 What is being sent
 where am i making the send
@@ -29,14 +28,14 @@ what is coming back
     */
 
     const deletePost = (todoid) =>{
-        fetch('https://todoapi.khoo.one/' + todoid,{
+        fetch('http://127.0.0.1:5000/todos' + todoid,{
             method: 'DELETE'
         }).then((result)=>{
             result.json().then((resp)=>{
                 console.warn(resp)
             })
         })
-        window.location.reload()
+        // window.location.reload()
     }
 
     // What am I using id for
@@ -62,11 +61,12 @@ what is coming back
    
 
     // What is this date for?
-    const date = new Date(tab.createdDate).toLocaleDateString()
+    const date = new Date(tab.datetime_created).toLocaleDateString('en-AU');
+    const time = new Date(tab.datetime_created).toLocaleTimeString('en-AU', { hour: 'numeric', minute: 'numeric', hour12: true});
     return (
         <div className="tabs">
             <h3>{tab.title}</h3>
-            <p>Date: {date}</p>
+            {tab.datetime_created && <p>{date}{time}</p>}
             <p className="postDescription">{tab.description}</p>
 
 
