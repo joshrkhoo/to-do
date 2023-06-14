@@ -14,7 +14,8 @@ what is coming back
 
     const deletePost = (e, todoid) =>{
         e.preventDefault()
-        fetch('https://todoapi.khoo.one/' + todoid,{
+        console.log(todoid)
+        fetch('http://127.0.0.1:5000/todos/' + todoid,{
             method: 'DELETE'
         }) 
         .then((resp)=>{
@@ -22,7 +23,7 @@ what is coming back
                 fetchData()
          })
         .catch(err =>{
-            console.log(err.resp.status)
+            console.log(err.resp?.status)
         })
         // window.location.reload()
     }
@@ -78,7 +79,7 @@ what is coming back
             <button
                 type="Delete"
                 // What is this id?
-                onClick={(e) => deletePost(e, tab.todoid)}
+                onClick={(e) => deletePost(e, tab.id)}
             >
                 Delete
             </button>

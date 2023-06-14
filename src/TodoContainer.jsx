@@ -50,7 +50,7 @@ const TodoContainer = () => {
                         </div>
                     ) :
                     <div>
-                        Loading
+                        Loading...
                     </div>
             }
 
