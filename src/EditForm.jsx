@@ -1,7 +1,7 @@
 import React from "react";
 import TodoForm from "./TodoForm";
 
-const NewTodo = () =>{
+const EditTodo = () =>{
 
     return
 
@@ -38,4 +38,4 @@ const NewTodo = () =>{
 
 
 
-export default NewTodo;
+export default EditTodo;

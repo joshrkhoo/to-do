@@ -1,8 +1,8 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TodoContainer from "./TodoContainer";
 
-const TodoForm = ({fetchData}) => {
+const TodoForm = ({tab, fetchData}) => {
     
     /*
     What kind of API is this?
@@ -19,7 +19,7 @@ const TodoForm = ({fetchData}) => {
      - create: post
      - read: get
      - update: put
-     - delete: delete
+     - delete: delet{e
 
      Response
      - array 
@@ -41,8 +41,10 @@ const TodoForm = ({fetchData}) => {
 
     // What is useState? What is this form of variable assignment called? [title, setState]
     
-    const [title, setTitle] = useState("") 
-    const [description, setDescription] = useState("")
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    // set false at constant value because only want it to be editable on click
+    const [editingTodo, setEditingTodo] = useState(null);
 
     /* What am I storing in here? 
     -'title' is the initial value being stored 
@@ -50,6 +52,24 @@ const TodoForm = ({fetchData}) => {
         - line 68
     - The quotations indicate the inital value of the object, in this case being an empty string
     */
+
+
+    useEffect(()=>{
+        if (editingTodo) {
+            axios.get(url + tab.todoid)
+            .then((resp)=>{
+                const {title, description} = resp.data;
+                setTitle(title);
+                setDescription(description);
+            })
+            .catch((error)=> {
+                console.log(error.resp.status)
+            })
+        }
+    }, [editingTodo, url]);
+
+
+
 
     // What is the purpose of this function?
     function submit(e){
@@ -63,6 +83,14 @@ const TodoForm = ({fetchData}) => {
          What are the parameters here? What else can we put in there
          What does this method return?
         */
+        if (editingTodo) {
+            axios.put(url + todoid)
+        }
+
+
+
+
+
          axios.post(url, {
             title: title,
             description: description
@@ -87,6 +115,7 @@ const TodoForm = ({fetchData}) => {
                 console.log(err.response.status)
             })
     }
+
 
 
 

@@ -1,8 +1,6 @@
 import { eventWrapper } from "@testing-library/user-event/dist/utils";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import deletePost from './ViewTodos'
-
+import React, { useEffect, useState } from "react"; import deletePost from './ViewTodos'
 const ViewTodos = ({ tab, fetchData }) => {
     /*
     What is being sent
@@ -10,12 +8,12 @@ const ViewTodos = ({ tab, fetchData }) => {
     what is coming back
     */
 
-
+    const url = 'http://127.0.0.1:5000/todos/' 
 
     const deletePost = (e, todoid) => {
         e.preventDefault()
         console.log(todoid)
-        fetch('http://127.0.0.1:5000/todos/' + todoid, {
+        fetch(url + todoid, {
             method: 'DELETE'
         })
             .then((resp) => {
@@ -27,6 +25,8 @@ const ViewTodos = ({ tab, fetchData }) => {
             })
         // window.location.reload()
     }
+
+
 
 
 
@@ -85,6 +85,16 @@ const ViewTodos = ({ tab, fetchData }) => {
                 onClick={(e) => deletePost(e, tab.id)}
             >
                 Delete
+            </button>
+
+            <button 
+
+                Type = "Edit"
+                onClick={(e)=>updatePost(e, tab.id)}
+            
+            >
+
+                Update
             </button>
 
         </div>
