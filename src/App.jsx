@@ -1,11 +1,19 @@
 import './App.css'
 import React from "react";
-import TodoContainer from "./TodoContainer";
+import {TodoContextProvider} from './TodoContext'
+import {ViewTodos} from './ViewTodos'
+import {TodoForm} from './TodoForm'
+import {TodoContainer} from './TodoContainer'
+
 
 const App = () =>{
     return(
         <div>
-            <TodoContainer/>
+            <TodoContextProvider>
+                <TodoContainer/>
+                <TodoForm/>
+                <ViewTodos/>
+            </TodoContextProvider>
         </div>
     )
 }

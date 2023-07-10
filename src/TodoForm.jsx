@@ -52,7 +52,7 @@ const TodoForm = ({fetchData}) => {
     */
 
     // What is the purpose of this function?
-    function submit(e){
+    function submitTodo(e){
         // What does this do? Do we need it? Can we try to do this without refreshing?
         // Is there another way to make it not reload using the e?
         e.preventDefault()
@@ -93,7 +93,7 @@ const TodoForm = ({fetchData}) => {
     return (
         <div>
             {/* What does onSubmit do? What is e? */}
-            <form onSubmit={(e) => submit(e)}>
+            <form onSubmit={(e) => submitTodo(e)}>
                 <div>
                     <div>
                         <input
