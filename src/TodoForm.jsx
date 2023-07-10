@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
-import TodoContainer from "./TodoContainer";
+import { useTodoContext } from "./TodoContext";
 
-const TodoForm = ({fetchData}) => {
+export const TodoForm = ({fetchData}) => {
     
     /*
     What kind of API is this?
@@ -37,12 +37,12 @@ const TodoForm = ({fetchData}) => {
 
 
 
-    const url = 'http://127.0.0.1:5000/todos'
+    // const url = 'http://127.0.0.1:5000/todos'
 
     // What is useState? What is this form of variable assignment called? [title, setState]
     
-    const [title, setTitle] = useState("") 
-    const [description, setDescription] = useState("")
+    // const [title, setTitle] = useState("") 
+    // const [description, setDescription] = useState("")
 
     /* What am I storing in here? 
     -'title' is the initial value being stored 
@@ -51,44 +51,45 @@ const TodoForm = ({fetchData}) => {
     - The quotations indicate the inital value of the object, in this case being an empty string
     */
 
-    // What is the purpose of this function?
-    function submitTodo(e){
-        // What does this do? Do we need it? Can we try to do this without refreshing?
-        // Is there another way to make it not reload using the e?
-        e.preventDefault()
-        /*/ 
-         What is this method? What is axios?
-            - axios is a promise-based HTTP library that lets us make requests to either our own or a third pary server to fetch data.
-            - We are using the post method
-         What are the parameters here? What else can we put in there
-         What does this method return?
-        */
-         axios.post(url, {
-            title: title,
-            description: description
-        })
-            // What is this called? What does this occur?
-            // What is the thing inside here () => {}
-            .then(response => {
-                setTitle("")
-                setDescription("")
-                fetchData()
-            }, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
+    // // What is the purpose of this function?
+    // function submitTodo(e){
+    //     // What does this do? Do we need it? Can we try to do this without refreshing?
+    //     // Is there another way to make it not reload using the e?
+    //     e.preventDefault()
+    //     /*/ 
+    //      What is this method? What is axios?
+    //         - axios is a promise-based HTTP library that lets us make requests to either our own or a third pary server to fetch data.
+    //         - We are using the post method
+    //      What are the parameters here? What else can we put in there
+    //      What does this method return?
+    //     */
+    //      axios.post(url, {
+    //         title: title,
+    //         description: description
+    //     })
+    //         // What is this called? What does this occur?
+    //         // What is the thing inside here () => {}
+    //         .then(response => {
+    //             setTitle("")
+    //             setDescription("")
+    //             fetchData()
+    //         }, {
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             }
+    //         })
             
-            /*
-            What is catch? When does this occur
-                - catches misbehaving code to ensure our app doesnt blow up into smithereens
-            */
-            .catch(err =>{
-                console.log(err.response.status)
-            })
-    }
+    //         /*
+    //         What is catch? When does this occur
+    //             - catches misbehaving code to ensure our app doesnt blow up into smithereens
+    //         */
+    //         .catch(err =>{
+    //             console.log(err.response.status)
+    //         })
+    // }
 
 
+    const {submitTodo, setTitle, setDescription, title, description} = useTodoContext()
 
     return (
         <div>
@@ -143,6 +144,5 @@ const TodoForm = ({fetchData}) => {
     )
 
 }
-
 
 export default TodoForm;

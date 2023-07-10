@@ -1,5 +1,5 @@
-import { type } from '@testing-library/user-event/dist/type';
 import React, {createContext, useState, useEffect, useContext} from 'react';
+import axios from 'axios';
 
 
 export const TodoContext = createContext()
@@ -36,7 +36,7 @@ export const TodoContextProvider = ({children}) => {
             .then(response => {
                 setTitle("")
                 setDescription("")
-                fetchData()
+                fetchTodoData()
             }, {
                 headers: {
                     'Content-Type': 'application/json'
@@ -53,21 +53,19 @@ export const TodoContextProvider = ({children}) => {
     }
 
 
-    const deletePost = (e, todoid) =>{
+    const deleteTodo = (e, todoid) =>{
         e.preventDefault()
         fetch(url + todoid,{
             method: 'DELETE'
         }) 
         .then((resp)=>{
                 console.log(resp)
-                fetchData()
+                fetchTodoData()
          })
         .catch(err =>{
             console.log(err.resp.status)
         })
     }
-
-
 
 
     return (
@@ -79,12 +77,11 @@ export const TodoContextProvider = ({children}) => {
                 description, 
                 setDescription, 
                 submitTodo, 
-                deletePost
+                deleteTodo,
             }
         }>
 
             {children}
-
 
         </TodoContext.Provider>
     )

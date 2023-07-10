@@ -6,7 +6,7 @@ import axios from "axios";
 import { useTodoContext } from "./TodoContext";
 
 
-const TodoContainer = () => {
+export const TodoContainer = () => {
     // const url = 'http://127.0.0.1:5000/todos'
     // const [todos, setTodos] = useState([])
 
@@ -30,6 +30,7 @@ const TodoContainer = () => {
     // useEffect(() => {
     //     fetchData() //callback function
     // },[]) // an empty array '[]' ensures the component runs only when the component is registered
+
     const {todos} = useTodoContext()
 
     return (
@@ -39,7 +40,7 @@ const TodoContainer = () => {
             <h2 className="title">To do List</h2>
 
             <div className="form">
-                <TodoForm fetchData={fetchData} />
+                <TodoForm/>
             </div>
 
             {
@@ -47,7 +48,7 @@ const TodoContainer = () => {
                     ? (
                         <div>
                             {todos.map((todo, i) => (
-                                <ViewTodos key={i} tab={todo} fetchData={fetchData}  />
+                                <ViewTodos key={i} tab={todo} />
                             ))}
                         </div>
                     ) :
@@ -61,4 +62,4 @@ const TodoContainer = () => {
     )
 }
 
-export default TodoContainer;
+export default TodoContainer;   
