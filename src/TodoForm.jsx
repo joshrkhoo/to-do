@@ -1,8 +1,8 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import TodoContainer from "./TodoContainer";
+import React, { useState } from "react";
+import { useTodoContext } from "./TodoContext";
 
-const TodoForm = ({tab, fetchData}) => {
+export const TodoForm = ({fetchData}) => {
     
     /*
     What kind of API is this?
@@ -37,14 +37,12 @@ const TodoForm = ({tab, fetchData}) => {
 
 
 
-    const url = 'http://127.0.0.1:5000/todos'
+    // const url = 'http://127.0.0.1:5000/todos'
 
     // What is useState? What is this form of variable assignment called? [title, setState]
     
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    // set false at constant value because only want it to be editable on click
-    const [editingTodo, setEditingTodo] = useState(null);
+    // const [title, setTitle] = useState("") 
+    // const [description, setDescription] = useState("")
 
     /* What am I storing in here? 
     -'title' is the initial value being stored 
@@ -53,76 +51,51 @@ const TodoForm = ({tab, fetchData}) => {
     - The quotations indicate the inital value of the object, in this case being an empty string
     */
 
-
-    useEffect(()=>{
-        if (editingTodo) {
-            axios.get(url + tab.todoid)
-            .then((resp)=>{
-                const {title, description} = resp.data;
-                setTitle(title);
-                setDescription(description);
-            })
-            .catch((error)=> {
-                console.log(error.resp.status)
-            })
-        }
-    }, [editingTodo, url]);
-
-
-
-
-    // What is the purpose of this function?
-    function submit(e){
-        // What does this do? Do we need it? Can we try to do this without refreshing?
-        // Is there another way to make it not reload using the e?
-        e.preventDefault()
-        /*/ 
-         What is this method? What is axios?
-            - axios is a promise-based HTTP library that lets us make requests to either our own or a third pary server to fetch data.
-            - We are using the post method
-         What are the parameters here? What else can we put in there
-         What does this method return?
-        */
-        if (editingTodo) {
-            axios.put(url + todoid)
-        }
-
-
-
-
-
-         axios.post(url, {
-            title: title,
-            description: description
-        })
-            // What is this called? What does this occur?
-            // What is the thing inside here () => {}
-            .then(response => {
-                setTitle("")
-                setDescription("")
-                fetchData()
-            }, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
+    // // What is the purpose of this function?
+    // function submitTodo(e){
+    //     // What does this do? Do we need it? Can we try to do this without refreshing?
+    //     // Is there another way to make it not reload using the e?
+    //     e.preventDefault()
+    //     /*/ 
+    //      What is this method? What is axios?
+    //         - axios is a promise-based HTTP library that lets us make requests to either our own or a third pary server to fetch data.
+    //         - We are using the post method
+    //      What are the parameters here? What else can we put in there
+    //      What does this method return?
+    //     */
+    //      axios.post(url, {
+    //         title: title,
+    //         description: description
+    //     })
+    //         // What is this called? What does this occur?
+    //         // What is the thing inside here () => {}
+    //         .then(response => {
+    //             setTitle("")
+    //             setDescription("")
+    //             fetchData()
+    //         }, {
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             }
+    //         })
             
-            /*
-            What is catch? When does this occur
-                - catches misbehaving code to ensure our app doesnt blow up into smithereens
-            */
-            .catch(err =>{
-                console.log(err.response.status)
-            })
-    }
+    //         /*
+    //         What is catch? When does this occur
+    //             - catches misbehaving code to ensure our app doesnt blow up into smithereens
+    //         */
+    //         .catch(err =>{
+    //             console.log(err.response.status)
+    //         })
+    // }
 
 
+    const {submitTodo, setTitle, setDescription, title, description} = useTodoContext()
 
 
     return (
         <div>
             {/* What does onSubmit do? What is e? */}
-            <form onSubmit={(e) => submit(e)}>
+            <form onSubmit={(e) => submitTodo(e)}>
                 <div>
                     <div>
                         <input
@@ -172,6 +145,5 @@ const TodoForm = ({tab, fetchData}) => {
     )
 
 }
-
 
 export default TodoForm;

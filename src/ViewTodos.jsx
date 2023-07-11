@@ -1,7 +1,10 @@
-import { eventWrapper } from "@testing-library/user-event/dist/utils";
 import axios from "axios";
 import React, { useEffect, useState } from "react"; import deletePost from './ViewTodos'
-const ViewTodos = ({ tab, fetchData }) => {
+
+
+
+
+const ViewTodos = ({ tab }) => {
     /*
     What is being sent
     where am i making the send
@@ -48,58 +51,44 @@ const ViewTodos = ({ tab, fetchData }) => {
         finally{
 
         }
-      */
-    /* 
-  What does this do?
-  - It is a try...catch...finally statement
-  - compromises of a try block and either a catch block, a finally block, or both.
-  - code in 'try' block is executed first
+      */  
+      /* 
+    What does this do?
+    - It is a try...catch...finally statement
+    - compromises of a try block and either a catch block, a finally block, or both.
+    - code in 'try' block is executed first
 
-      try
-      - tests a block of code for errors
-      catch 
-      - handles the errors
-      throw
-      - lets us create custom errors
-      finally
-      - lets us execute code after trying catch regardless of the result
-  */
+        try
+        - tests a block of code for errors
+        catch 
+        - handles the errors
+        throw
+        - lets us create custom errors
+        finally
+        - lets us execute code after trying catch regardless of the result
+    */
+   
+    const {deleteTodo} = useTodoContext()
 
+    const date = new Date(tab.createdDate).toLocaleDateString    
 
-    // What is this date for?
-    // const date = new Date(tab.datetime_created).toLocaleDateString('en-AU');
-    // const time = new Date(tab.datetime_created).toLocaleTimeString('en-AU', { hour: 'numeric', minute: 'numeric', hour12: true });
-    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric'};
-    var date = new Date(tab.datetime_created)
-    date = date.toLocaleDateString('en-AU', options)
     return (
+        
         <div className="tabs">
             <h3>{tab.title}</h3>
-            {tab.datetime_created && <p>{date}</p>}
+            <p>Date: {date}</p>
             <p className="postDescription">{tab.description}</p>
-
 
             <button
                 type="Delete"
                 // What is this id?
-                onClick={(e) => deletePost(e, tab.id)}
+                onClick={deleteTodo}
             >
                 Delete
             </button>
-
-            <button 
-
-                Type = "Edit"
-                onClick={(e)=>updatePost(e, tab.id)}
             
-            >
-
-                Update
-            </button>
-
-        </div>
+        </div>     
     )
-
 }
 
 export default ViewTodos;
